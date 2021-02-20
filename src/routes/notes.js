@@ -2,14 +2,17 @@
 //Urls de la pag principal
 const express = require('express');
 const router = express.Router();
-
 const Note = require('../models/Note');
+const {
+    isAuthenticated
+} = require('../helpers/auth');
 
-router.get('/notes/add', (req, res) => {
+
+router.get('/notes/add', isAuthenticated, (req, res) => {
     res.render('notes/new-note')
 });
 
-router.post('/notes/new-note', async (req, res) => {
+router.post('/notes/new-note', isAuthenticated, async (req, res) => {
     const {
         title,
         description
@@ -36,17 +39,17 @@ router.post('/notes/new-note', async (req, res) => {
             title,
             description
         });
+        newNote.user = req.user.id;
         await newNote.save();
         req.flash('success_msg', 'Note added successfully');
         res.redirect('/notes');
     }
 });
 
-router.get('/notes', async (req, res) => {
-    const arrayNotes = await Note.find().sort({
+router.get('/notes', isAuthenticated, async (req, res) => {
+    const arrayNotes = await Note.find({user: req.user.id}).sort({
         date: 'desc'
     });
-    console.log(arrayNotes)
     res.render('notes/all-notes', {
         arrayNotes: arrayNotes.map(e => {
             return {
@@ -58,7 +61,7 @@ router.get('/notes', async (req, res) => {
     });
 });
 
-router.get('/notes/edit/:id', async (req, res) => {
+router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
 
     try {
         const note = await Note.findById(req.params.id);
@@ -77,7 +80,7 @@ router.get('/notes/edit/:id', async (req, res) => {
     }
 })
 
-router.put('/notes/edit-note/:id', async (req, res) => {
+router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
     const {
         title,
         description
@@ -90,7 +93,7 @@ router.put('/notes/edit-note/:id', async (req, res) => {
     res.redirect('/notes');
 });
 
-router.delete('/notes/delete/:id', async (req, res) => {
+router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Note deleted successfully');
     res.redirect('/notes');

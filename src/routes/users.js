@@ -70,4 +70,8 @@ router.post('/users/signup', async (req, res) => {
         res.redirect('/users/signin');
     }
 });
+router.get('/users/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
 module.exports = router;
