@@ -1,20 +1,22 @@
 <div class="row">
     {{#each arrayNotes}}
-    <div class="col-md-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title d-flex justify-content-between align-items-center">
-                    {{this.title}} <a href='/notes/edit/{{this.id}}'><i class="fas fa-edit"></i></a>
+    <div class="flip-card mx-auto">
+        <div class="flip-card-inner">
+            <div class="card flip-card-front justify-content-center">
+                <h4>
+                    {{this.title}}
                 </h4>
-                <p>{{this.description}}</p>
-                <form action="/notes/delete/{{this.id}}?_method=DELETE" method="POST">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-danger btn-block btn-sm" type="submit">
-                        delete
-                    </button>
-                </form>
+            </div>
+            <div class="card flip-card-back justify-content-center">
+                <h5>{{this.description}}</h5>
             </div>
         </div>
+    <button class="btn btn-danger btn-sm" style="width: 50%;float:left"   type="submit">
+        delete
+    </button>
+    <button class="btn btn-primary btn-sm" style="width: 50%; float:right" type="submit">
+        edit
+    </button>
     </div>
     {{else}}
     <div class="card mx-auto">
@@ -26,5 +28,6 @@
             </a>
         </div>
     </div>
+    
     {{/each}}
 </div>

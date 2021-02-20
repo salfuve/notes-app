@@ -78,7 +78,7 @@ router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-})
+});
 
 router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
     const {
@@ -93,9 +93,18 @@ router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
     res.redirect('/notes');
 });
 
+router.get('/notes/delete/:id', isAuthenticated, async (req, res) => {
+
+    await Note.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Note deleted successfully');
+    res.redirect('/notes');
+});
+
+/**
 router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Note deleted successfully');
     res.redirect('/notes');
 });
+*/
 module.exports = router;
