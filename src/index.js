@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
-const session= require('express-session');
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 //Inicializers
 
 const app = express();
 require('./database');
-
+require('./config/passport');
 //settings
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -33,9 +35,21 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 //global variables
+//para mandar mensajes entre las vistas usamos el 'connect-flash' y para que estos mensajes sean visibles en todo momento
+//creamos la variable global
+app.use((req, res, next) => {
 
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error'); //mensajes flash de passport
+
+    next(); //aseguramos que el navegador no se quede bloqueado ya que node es de un solo hilo
+});
 //Routes 
 app.use(require('./routes/index'));
 app.use(require('./routes/users'));

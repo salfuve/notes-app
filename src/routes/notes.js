@@ -9,14 +9,21 @@ router.get('/notes/add', (req, res) => {
     res.render('notes/new-note')
 });
 
-router.post('/notes/new-note', async(req, res) => {
-    const { title, description } = req.body;
+router.post('/notes/new-note', async (req, res) => {
+    const {
+        title,
+        description
+    } = req.body;
     const errors = [];
     if (!title) {
-        errors.push({ text: 'Please add a title' });
+        errors.push({
+            text: 'Please add a title'
+        });
     }
     if (!description) {
-        errors.push({ text: 'Please add a description' });
+        errors.push({
+            text: 'Please add a description'
+        });
     }
     if (errors.length > 0) {
         res.render('notes/new-note', {
@@ -25,19 +32,33 @@ router.post('/notes/new-note', async(req, res) => {
             description
         });
     } else {
-        const newNote = new Note({ title, description});
+        const newNote = new Note({
+            title,
+            description
+        });
         await newNote.save();
+        req.flash('success_msg', 'Note added successfully');
         res.redirect('/notes');
     }
 });
 
-router.get('/notes', async(req, res) => {
-    const arrayNotes = await Note.find().sort({date: 'desc'});
+router.get('/notes', async (req, res) => {
+    const arrayNotes = await Note.find().sort({
+        date: 'desc'
+    });
     console.log(arrayNotes)
-   res.render('notes/all-notes', {arrayNotes: arrayNotes.map(e => {return {title: e.title, description: e.description, id: e._id}})}  );
+    res.render('notes/all-notes', {
+        arrayNotes: arrayNotes.map(e => {
+            return {
+                title: e.title,
+                description: e.description,
+                id: e._id
+            }
+        })
+    });
 });
 
-router.get('/notes/edit/:id', async(req, res) => {
+router.get('/notes/edit/:id', async (req, res) => {
 
     try {
         const note = await Note.findById(req.params.id);
@@ -47,14 +68,31 @@ router.get('/notes/edit/:id', async(req, res) => {
             title: note.title,
             description: note.description
         }
-        res.render('notes/edit-note', {note: noteObject});
-        
+        res.render('notes/edit-note', {
+            note: noteObject
+        });
+
     } catch (error) {
         console.log(error);
     }
 })
 
-router.put('/notes/edit-note/:id', (req, res) => {
+router.put('/notes/edit-note/:id', async (req, res) => {
+    const {
+        title,
+        description
+    } = req.body;
+    await Note.findByIdAndUpdate(req.params.id, {
+        title,
+        description
+    });
+    req.flash('success_msg', 'Note updated successfully');
+    res.redirect('/notes');
+});
 
+router.delete('/notes/delete/:id', async (req, res) => {
+    await Note.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Note deleted successfully');
+    res.redirect('/notes');
 });
 module.exports = router;

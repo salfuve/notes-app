@@ -7,9 +7,12 @@
                     {{this.title}} <a href='/notes/edit/{{this.id}}'><i class="fas fa-edit"></i></a>
                 </h4>
                 <p>{{this.description}}</p>
-                <button class="btn btn-danger btn-block btn-sm">
-                    delete
-                </button>
+                <form action="/notes/delete/{{this.id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger btn-block btn-sm" type="submit">
+                        delete
+                    </button>
+                </form>
             </div>
         </div>
     </div>
