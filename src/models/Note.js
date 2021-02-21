@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const NoteSchema = new Schema({
-    title : { type: String, required: true},
-    description: { type: String, required: true},
+    expresion : { type: String, required: true},
+    idiom: { type: String, required: true},
+    example: {type: String, require:false},
     date: {type: Date, default: Date.now},
     user: {type: String}
 });

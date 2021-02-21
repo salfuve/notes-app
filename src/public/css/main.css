@@ -9,6 +9,7 @@ body {
 }
 
 .flip-card {
+    margin-top: 50px;
     background-color: transparent;
     width: 18rem;
     height: 18rem;

@@ -14,34 +14,37 @@ router.get('/notes/add', isAuthenticated, (req, res) => {
 
 router.post('/notes/new-note', isAuthenticated, async (req, res) => {
     const {
-        title,
-        description
+        expresion,
+        idiom,
+        example
     } = req.body;
     const errors = [];
-    if (!title) {
+    if (!expresion) {
         errors.push({
-            text: 'Please add a title'
+            text: 'Please add a sentence'
         });
     }
-    if (!description) {
+    if (!idiom) {
         errors.push({
-            text: 'Please add a description'
+            text: 'Please add an idiom'
         });
     }
     if (errors.length > 0) {
         res.render('notes/new-note', {
             errors,
-            title,
-            description
+            expresion,
+            idiom,
+            example
         });
     } else {
         const newNote = new Note({
-            title,
-            description
+            expresion,
+            idiom,
+            example
         });
         newNote.user = req.user.id;
         await newNote.save();
-        req.flash('success_msg', 'Note added successfully');
+        req.flash('success_msg', 'Idiom added successfully');
         res.redirect('/notes');
     }
 });
@@ -53,8 +56,28 @@ router.get('/notes', isAuthenticated, async (req, res) => {
     res.render('notes/all-notes', {
         arrayNotes: arrayNotes.map(e => {
             return {
-                title: e.title,
-                description: e.description,
+                expresion: e.expresion,
+                idiom: e.idiom,
+                example: e.example,
+                id: e._id
+            }
+        })
+    });
+});
+
+router.post('/notes/search', isAuthenticated, async (req, res) => {
+
+    const {text} = req.body;
+    const arrayNotes = await Note.find({user: req.user.id, idiom : {$regex : new RegExp(text)}}).sort({
+        date: 'desc'
+    });
+      
+        res.render('notes/all-notes', {
+        arrayNotes: arrayNotes.map(e => {
+            return {
+                expresion: e.expresion,
+                idiom: e.idiom,
+                example: e.example,
                 id: e._id
             }
         })
@@ -68,8 +91,9 @@ router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
 
         const noteObject = {
             id: note._id,
-            title: note.title,
-            description: note.description
+            expresion: note.expresion,
+            idiom: note.idiom,
+            example: note.example
         }
         res.render('notes/edit-note', {
             note: noteObject
@@ -82,29 +106,30 @@ router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
 
 router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
     const {
-        title,
-        description
+        expresion,
+        idiom,
+        example
     } = req.body;
     await Note.findByIdAndUpdate(req.params.id, {
-        title,
-        description
+        expresion,
+        idiom,
+        example
     });
-    req.flash('success_msg', 'Note updated successfully');
+    req.flash('success_msg', 'Idiom updated successfully');
     res.redirect('/notes');
 });
 
+router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
+    await Note.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Idiom deleted successfully');
+    res.redirect('/notes');
+});
+module.exports = router;
+/**
 router.get('/notes/delete/:id', isAuthenticated, async (req, res) => {
 
     await Note.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Note deleted successfully');
-    res.redirect('/notes');
-});
-
-/**
-router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
-    await Note.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Note deleted successfully');
+    req.flash('success_msg', 'Idiom deleted successfully');
     res.redirect('/notes');
 });
 */
-module.exports = router;
