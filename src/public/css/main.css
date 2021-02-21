@@ -1,45 +1,74 @@
 body {
-    background: #1D2B64;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F8CDDA, #1D2B64);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F8CDDA, #1D2B64); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
+  background: #1d2b64; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f8cdda,
+    #1d2b64
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f8cdda,
+    #1d2b64
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .logo {
-    width: 30%;
+  width: 30%;
 }
 
 .flip-card {
-    margin-top: 50px;
-    background-color: transparent;
-    width: 18rem;
-    height: 18rem;
-    text-align: center;
-  }
-  
-  .flip-card-inner {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
-  
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  
-  .flip-card-back {
-    background-color: white;
-    color: black;
-    transform: rotateY(180deg);
-    text-align: center;
-  }
+  margin-top: 50px;
+  margin-left: 0px;
+  margin-right: 50px;
+  background-color: transparent;
+  width: 18rem;
+  height: 18rem;
+  text-align: center;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  background-color: white;
+  color: black;
+  transform: rotateY(180deg);
+  text-align: center;
+}
+
+
+.search-form {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.search-btn {
+  background-color: lightgreen;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.img-switch {
+    width: 10%;
+    margin-left: 10px;
+}
