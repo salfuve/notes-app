@@ -14,33 +14,36 @@ router.get('/notes/add', isAuthenticated, (req, res) => {
 
 router.post('/notes/new-note', isAuthenticated, async (req, res) => {
     const {
-        expresion,
-        idiom,
-        example
+        idiom_es,
+        idiom_en,
+        example_en,
+        example_es
     } = req.body;
     const errors = [];
-    if (!expresion) {
+    if (!idiom_es) {
         errors.push({
-            text: 'Please add a sentence'
+            text: 'Please add an idiom in spanish'
         });
     }
-    if (!idiom) {
+    if (!idiom_en) {
         errors.push({
-            text: 'Please add an idiom'
+            text: 'Please add an idiom in english'
         });
     }
     if (errors.length > 0) {
         res.render('notes/new-note', {
             errors,
-            expresion,
-            idiom,
-            example
+            idiom_es,
+            idiom_en,
+            example_en,
+            example_es
         });
     } else {
         const newNote = new Note({
-            expresion,
-            idiom,
-            example
+            idiom_es,
+            idiom_en,
+            example_en,
+            example_es
         });
         newNote.user = req.user.id;
         await newNote.save();
@@ -56,10 +59,12 @@ router.get('/notes', isAuthenticated, async (req, res) => {
     res.render('notes/all-notes', {
         arrayNotes: arrayNotes.map(e => {
             return {
-                expresion: e.expresion,
-                idiom: e.idiom,
-                example: e.example,
+                idiom_es: e.idiom_es,
+                idiom_en: e.idiom_en,
+                example_en: e.example_en,
+                example_es: e.example_es,
                 id: e._id
+
             }
         })
     });
@@ -68,16 +73,17 @@ router.get('/notes', isAuthenticated, async (req, res) => {
 router.post('/notes/search', isAuthenticated, async (req, res) => {
 
     const {text} = req.body;
-    const arrayNotes = await Note.find({user: req.user.id, idiom : {$regex : new RegExp(text)}}).sort({
+    const arrayNotes = await Note.find({user: req.user.id, idiom_en : {$regex : new RegExp(text)}}).sort({
         date: 'desc'
     });
       
         res.render('notes/all-notes', {
         arrayNotes: arrayNotes.map(e => {
             return {
-                expresion: e.expresion,
-                idiom: e.idiom,
-                example: e.example,
+                idiom_es: e.idiom_es,
+                idiom_en: e.idiom_en,
+                example_en: e.example_es,
+                example_es: e.example_es,
                 id: e._id
             }
         })
@@ -91,9 +97,10 @@ router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
 
         const noteObject = {
             id: note._id,
-            expresion: note.expresion,
-            idiom: note.idiom,
-            example: note.example
+            idiom_es: note.idiom_es,
+            idiom_en: note.idiom_en,
+            example_en: note.example_en,
+            example_es: note.example_es
         }
         res.render('notes/edit-note', {
             note: noteObject
@@ -106,15 +113,19 @@ router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
 
 router.put('/notes/edit-note/:id', isAuthenticated, async (req, res) => {
     const {
-        expresion,
-        idiom,
-        example
+        idiom_es,
+        idiom_en,
+        example_en,
+        example_es
     } = req.body;
+
     await Note.findByIdAndUpdate(req.params.id, {
-        expresion,
-        idiom,
-        example
+        idiom_es,
+        idiom_en,
+        example_en,
+        example_es
     });
+
     req.flash('success_msg', 'Idiom updated successfully');
     res.redirect('/notes');
 });
@@ -125,11 +136,3 @@ router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
     res.redirect('/notes');
 });
 module.exports = router;
-/**
-router.get('/notes/delete/:id', isAuthenticated, async (req, res) => {
-
-    await Note.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Idiom deleted successfully');
-    res.redirect('/notes');
-});
-*/

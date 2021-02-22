@@ -2,7 +2,7 @@
 
     <div class="row">
         <form action="/notes/search" method="POST">
-            <input type="search" name="text" placeholder="Search..." aria-label="Search" class="search-form">
+            <input type="search" name="text" placeholder="Search..." aria-label="Search" class="search-form" autofocus>
             <button class="btn btn-outline-success search-btn" type="submit">Search</button>
         </form>
         <form action="/notes/search" method="POST">
@@ -15,13 +15,16 @@
             <div class="flip-card-inner">
                 <div class="card flip-card-front justify-content-center">
                     <h4>
-                        {{this.expresion}}
+                        {{this.idiom_es}}
                     </h4>
+                    <hr>
+                    <p>"{{this.example_es}}"</p>
                 </div>
                 <div class="card flip-card-back justify-content-center">
-                    <h5>{{this.idiom}}</h5>
-                    <p>"{{this.example}}"
-                    <p>
+                    <h5>{{this.idiom_en}}</h5>
+                    <hr>
+                    <p>"{{this.example_en}}"
+                    </p>
                 </div>
             </div>
             <form action="/notes/delete/{{this.id}}?_method=DELETE" method="POST">
