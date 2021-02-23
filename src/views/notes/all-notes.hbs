@@ -5,9 +5,9 @@
             <input type="search" name="text" placeholder="Search..." aria-label="Search" class="search-form" autofocus>
             <button class="btn btn-outline-success search-btn" type="submit">Search</button>
         </form>
-        <form action="/notes/search" method="POST">
-            <img src="/img/switch.png" class="img-switch" />
-        </form>
+        <button>
+            <img src="/img/switch.png" class="img-switch" id="switchButton">
+        </button>
     </div>
     <div class="row">
         {{#each arrayNotes}}
@@ -53,3 +53,19 @@
         {{/each}}
     </div>
 </div>
+
+<script>
+    document.getElementById("switchButton").addEventListener("click", switchLanguage);
+
+    function switchLanguage() {
+
+        let root = document.documentElement;
+        const a = getComputedStyle(root).getPropertyValue('--flip-card-1');
+        const b = getComputedStyle(root).getPropertyValue('--flip-card-2');
+
+        root.style.setProperty('--flip-card-1', b);
+
+        root.style.setProperty('--flip-card-2', a);
+
+    }
+</script>

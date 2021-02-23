@@ -12,6 +12,12 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/**Custom css variables*/
+:root {​​
+  --root: "";
+  --flip-card-1: rotateY(0deg);
+  --flip-card-2: rotateY(180deg);
+  }
 .logo {
   width: 30%;
 }
@@ -51,10 +57,13 @@ body {
 .flip-card-back {
   background-color: white;
   color: black;
-  transform: rotateY(180deg);
+  transform: var(--flip-card-2);
   text-align: center;
 }
 
+.flip-card-front {
+  transform: var(--flip-card-1);
+} 
 
 .search-form {
     padding-left: 4px;
