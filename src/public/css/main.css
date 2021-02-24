@@ -78,6 +78,9 @@ body {
 }
 
 .img-switch {
-    width: 10%;
+    width: 5%;
     margin-left: 10px;
+}
+.img-switch:hover {
+  cursor: pointer;
 }
