@@ -43,7 +43,7 @@ router.post('/notes/new-note', isAuthenticated, async (req, res) => {
             idiom_es,
             idiom_en,
             example_en,
-            example_en
+            example_es
         });
         newNote.user = req.user.id;
         await newNote.save();
@@ -82,7 +82,7 @@ router.post('/notes/search', isAuthenticated, async (req, res) => {
             return {
                 idiom_es: e.idiom_es,
                 idiom_en: e.idiom_en,
-                example_en: e.example_es,
+                example_en: e.example_en,
                 example_es: e.example_es,
                 id: e._id
             }
