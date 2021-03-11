@@ -5,7 +5,10 @@
             <input type="search" name="text" placeholder="Search..." aria-label="Search" class="search-form" autofocus>
             <button class="btn btn-outline-success search-btn" type="submit">Search</button>
         </form>
-            <img src="/img/switch.png" class="img-switch" id="switchButton">
+        <img src="/img/switch.png" class="img-switch" id="switchButton">
+        <form action="/exams/new" method="POST" class="exam-btn">
+            <button class="btn btn-primary" type="submit">Take an exam!</button>
+        </form>
     </div>
     <div class="row">
         {{#each arrayNotes}}

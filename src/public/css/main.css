@@ -84,3 +84,7 @@ body {
 .img-switch:hover {
   cursor: pointer;
 }
+
+.exam-btn {
+  padding-left: 20%;
+}
