@@ -91,6 +91,16 @@ body {
 .answer {
   color:green;
 }
+.correct-answer {
+  background-color: lightgreen;
+}
 .wrong-answer {
+  color:red;
+}
+
+.fa-check {
+  color:green;
+}
+.fa-times-circle{
   color:red;
 }

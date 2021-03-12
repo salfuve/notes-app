@@ -4,73 +4,162 @@
         {{#with answers}}
         <ul>
             <li>
+                {{#if error_1}}
+                <p>1. To suddenly stop moving or doing something:</p>
+                I <span class="wrong-answer"> {{answer_1}}</span> when I heard the scream
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="wrong-answer">{{correctAns1}}</span>
+                {{else}}
                 <p> 1. To suddenly stop moving or doing something:</p>
                 I <span class="answer"> {{answer_1}}</span> when I heard the scream
-            {{#if error_1}}
-                I <span class="wrong-answer"> {{answer_1}}</span> when I heard the scream ERROR
-            {{/if}}
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
-                <div class="form-group">
-                    <p>2. To start to behave in a way that is not socially acceptable:</p>
-                    This time, you've really <input type="text" name="answer_2"> (crossed the line.)
-                </div>
+                {{#if error_2}}
+                <p>2. To start to behave in a way that is not socially acceptable:</p>
+                This time, you've really <span class="wrong-answer"> {{answer_2}}</span>
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns2}}</span>
+                {{else}}
+                <p>2. To start to behave in a way that is not socially acceptable:</p>
+                This time, you've really <span class="answer"> {{answer_2}}</span>
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
+                {{#if error3_4}}
                 <p>3. It is temporarily not being dealt with or considered, especially because it is not urgent
-                    or
-                </p>
-                important
-                We've all had to <input type="text" name="answer_3"> our plans <input type="text" name="answer_4">for a
-                while (put sth on the back burner)
+                    or important:</p>
+                We've all had to <span class="wrong-answer"> {{answer_3}}</span> our plans <span
+                    class="wrong-answer">{{answer_4}}</span> a
+                while due COVID-19
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns3}} "[sth]" {{correctAns4}}</span>
+                {{else}}
+                <p>3. It is temporarily not being dealt with or considered, especially because it is not urgent
+                    or important:</p>
+                We've all had to <span class="answer"> {{answer_3}}</span> our plans <span
+                    class="answer">{{answer_4}}</span> a
+                while due COVID-19
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
-                <p>4. To be getting better after an illness or injury</p>
-                She's been ill with the flu but she's <input type="text" name="answer_5"> now (on the mend)
+                {{#if error_5}}
+                <p>4. To be getting better after an illness or injury:</p>
+                She's been ill with the flu but she's <span class="wrong-answer">{{answer_5}}</span> now.
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns5}}</span>
+                {{else}}
+                <p>4. To be getting better after an illness or injury:</p>
+                She's been ill with the flu but she's <span class="answer">{{answer_5}}</span> now.
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
-                <p>5. To begin to succeed</p>
-                Has the city <input type="text" name="answer_6"> any <input type="text" name="answer_7"> in
-                attracting new businesses? (made headway / made progess / made
-                strides)
+                {{#if error6_7}}
+                <p>5. To begin to succeed:</p>
+                Has the city <span class="wrong-answer">{{answer_6}}</span> any <span
+                    class="wrong-answer">{{answer_7}}</span> in
+                attracting new businesses?
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns6}} {{correctAns7}}</span>
+                {{else}}
+                <p>5. To begin to succeed:</p>
+                Has the city <span class="answer">{{answer_6}}</span> any <span class="answer">{{answer_7}}</span> in
+                attracting new businesses?
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
+                {{#if error_8}}
                 <p>6. Describing or including all the bad qualities in a person's character, with no attempt to
-                    hide
-                    them</p>
-                He tried to paint the president as he really was, <input type="text" name="answer_8">(warts and
-                all)
+                    hide them:</p>
+                He tried to paint the president as he really was, <span class="wrong-answer">{{answer_8}}</span>.
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns8}}</span>
+                {{else}}
+                <p>6. Describing or including all the bad qualities in a person's character, with no attempt to
+                    hide them:</p>
+                He tried to paint the president as he really was, <span class="answer">{{answer_8}}</span>.
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
+                {{#if error_9}}
                 <p>7. Said When you recognize that you must accept an offer or a situation because it is the only
-                    one
-                    available
-                    to you.</p>
-                I would have preferred a house of my own rather than sharing, but <input type="text" name="answer_9">, I
+                    one available to you:</p>
+                I would have preferred a house of my own rather than sharing, but <span
+                    class="wrong-answer">{{answer_9}}</span>, I
                 suppose.
-                (beggars can't be choosers)
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns9}}</span>
+                {{else}}
+                <p>7. Said When you recognize that you must accept an offer or a situation because it is the only
+                    one available to you:</p>
+                I would have preferred a house of my own rather than sharing, but <span
+                    class="answer">{{answer_9}}</span>, I
+                suppose.
+                <i class="fas fa-check"></i>
+                {{/if}}
             </li>
             <hr>
             <li>
-                <p>8. Immediately</p>
-                You can't expect to be accepted in a new town <input type="text" name="answer_10">, it takes time
-                (right off the bat)
+                {{#if error_10}}
+                <p>8. Immediately:</p>
+                You can't expect to be accepted in a new town <span class="wrong-answer">{{answer_10}}</span>, it takes
+                time.
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns10}}</span>
+                {{else}}
+                <p>8. Immediately:</p>
+                You can't expect to be accepted in a new town <span class="answer">{{answer_10}}</span>, it takes
+                time.
+                <i class="fas fa-check"></i>
+                 {{/if}}
             </li>
             <hr>
             <li>
-                <p>9. To be involved in making a decision about something</p>
-                The employees <input type="text" name="answer_11"> in the restructuring of the company. (had no say)
+                {{#if error_11}}
+                <p>9. To be involved in making a decision about something:</p>
+                The employees <span class="wrong-answer">{{answer_11}}</span> in the restructuring of the company.
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns11}}</span>
+                {{else}}
+                <p>9. To be involved in making a decision about something:</p>
+                The employees <span class="answer">{{answer_11}}</span> in the restructuring of the company.
+                <i class="fas fa-check"></i>
+                 {{/if}}
             </li>
             <hr>
             <li>
+                {{#if error_12}}
                 <p>10. To do the same things every day and to not want to change those habits:</p>
-                As people get older, they often <input type="text" name="answer_12"> (become set in their ways)
+                As people get older, they often <span class="wrong-answer">{{answer_12}}</span>
+                <i class="fas fa-times-circle"></i>
+                <i class="fas fa-long-arrow-alt-right"></i>
+                <span class="correct-answer">{{correctAns12}}</span>
+                {{else}}
+                <p>10. To do the same things every day and to not want to change those habits:</p>
+                As people get older, they often <span class="answer">{{answer_12}}</span>
+                <i class="fas fa-check"></i>
+                 {{/if}}
             </li>
         </ul>
         {{/with}}
