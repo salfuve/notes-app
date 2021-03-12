@@ -10,28 +10,30 @@ router.post('/exams/new', (req, res) => {
 
 router.post('/exams/validate', (req, res) => {
 
-    const answers = req.body;
+    const ans1 = ['stop','dead','tracks'];
+    const answers = {};
 
-console.log(answers.answer_1.toLowerCase().includes('stop'));
-
-    const answersObject = 
-        {answer_1: answers.answer_1,
-        answer_2: answers.answer_2,
-        answer_3: answers.answer_3,
-        answer_4: answers.answer_4,
-        answer_5: answers.answer_5,
-        answer_6: answers.answer_6,
-        answer_7: answers.answer_7,
-        answer_8: answers.answer_8,
-        answer_9: answers.answer_9,
-        answer_10: answers.answer_10,
-        answer_11: answers.answer_11,
-        answer_12: answers.answer_12
+    const answersObject =
+    {
+        answer_1: req.body.answer_1,
+        ...(ans1.every(e =>  req.body.answer_1.toLowerCase().includes(e)) ? {}: {error_1:true}),
+        answer_2: req.body.answer_2,
+        answer_3: req.body.answer_3,
+        answer_4: req.body.answer_4,
+        answer_5: req.body.answer_5,
+        answer_6: req.body.answer_6,
+        answer_7: req.body.answer_7,
+        answer_8: req.body.answer_8,
+        answer_9: req.body.answer_9,
+        answer_10: req.body.answer_10,
+        answer_11: req.body.answer_11,
+        answer_12: req.body.answer_12
     };
-    
+
     res.render('exams/exam-1-answers', {
         answers: answersObject
-        });
+    });
+
 });
 
 module.exports = router;
