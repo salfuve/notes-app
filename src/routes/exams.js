@@ -5,8 +5,12 @@ const {
 } = require('../helpers/auth');
 
 router.post('/exams/new', (req, res) => {
-    res.render('exams/exam-1');
+    //res.render('exams/exam-1');
+    res.render('exams/exams');
 });
+router.get('/exams/exam1',(req,res) => {
+    res.render('exams/exam1/exam-1');
+})
 
 router.post('/exams/validate', (req, res) => {
 
@@ -92,7 +96,7 @@ router.post('/exams/validate', (req, res) => {
         answer_12: req.body.answer_12
     };
 
-    res.render('exams/exam-1-answers', {
+    res.render('exams/exam1/exam-1-answers', {
         answers: answersObject
     });
 
