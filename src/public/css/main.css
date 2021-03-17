@@ -1,23 +1,23 @@
 body {
-  background: #1d2b64; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #f8cdda,
-    #1d2b64
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #f8cdda,
-    #1d2b64
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #1d2b64;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right,
+      #f8cdda,
+      #1d2b64);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right,
+      #f8cdda,
+      #1d2b64);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /**Custom css variables*/
-:root {​​
-  --root: "";
+:root {
+  ​​ --root: "";
   --flip-card-1: rotateY(0deg);
   --flip-card-2: rotateY(180deg);
-  }
+}
+
 .logo {
   width: 30%;
 }
@@ -63,12 +63,13 @@ body {
 
 .flip-card-front {
   transform: var(--flip-card-1);
-} 
+}
 
 .search-form {
-    padding-left: 4px;
-    padding-right: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
+
 .search-btn {
   background-color: lightgreen;
   padding-left: 4px;
@@ -78,29 +79,38 @@ body {
 }
 
 .img-switch {
-    width: 5%;
-    margin-left: 10px;
+  width: 5%;
+  margin-left: 10px;
 }
+
 .img-switch:hover {
   cursor: pointer;
+}
+
+.content {
+  padding: 20px;
 }
 
 .exam-btn {
   padding-left: 20%;
 }
+
 .answer {
-  color:green;
+  color: green;
 }
+
 .correct-answer {
   background-color: lightgreen;
 }
+
 .wrong-answer {
-  color:red;
+  color: red;
 }
 
 .fa-check {
-  color:green;
+  color: green;
 }
-.fa-times-circle{
-  color:red;
+
+.fa-times-circle {
+  color: red;
 }
