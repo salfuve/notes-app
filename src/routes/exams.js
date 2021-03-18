@@ -4,6 +4,8 @@ const {
     isAuthenticated
 } = require('../helpers/auth');
 
+const Note = require('../models/Note');
+
 router.post('/exams/new', (req, res) => {
     //res.render('exams/exam-1');
     res.render('exams/exams');
@@ -14,16 +16,17 @@ router.get('/exams/exam1', (req, res) => {
 })
 router.get('/exams/exam2', (req, res) => {
 
-    const questions = [{ question: "hola soy una y hago #### y ####", answer: "a", _id: "6031316637b17233fc6932b3"}, { question: "#### hola, yo soy ####", answer: "b", _id: 2 }];
+    const questions = [{ question: "hola soy una y hago #### y ####", answer: "a", _id: "6031316637b17233fc6932b3" }, { question: "#### hola, yo soy ####", answer: "b", _id: "9991316637b17233fc6932b3" }];
 
     res.render('exams/exam2/exam-2', {
-        questions: questions.map(e => {
+        
+        questions: questions.map((e, i) => {
             return {
-                question: e.question.replace(/####/g, '<input type="text" name="answer">'),
+                question: e.question.replace(/####/g, '<input type="text" name="answer['+i+']">'),
                 answer: e.answer,
                 id: e._id
             }
-        })
+        })  
     });
 });
 
@@ -116,17 +119,16 @@ router.post('/exams/validate', (req, res) => {
     });
 
 });
-router.post('/exams/validate-test', async(req, res) => {
+router.post('/exams/validate-test', async (req, res) => {
 
-console.log("request id: ", req.body.item);
-console.log("request body: ", req.body);
+    console.log("request id: ", req.body.item);
+    console.log("request body: ", req.body);
 
-const ids = req.body.item;
-ids.array.forEach(element => {
-    const idiom = await Note.findById(req.body.item);
-    
-});
-    console.log('answer: ', answer);
+    const ids = req.body.item;
+    for (const id of ids) {
+        const idiom = await Note.findById(id);
+        console.log(idiom);
+    }
 
 });
 module.exports = router;

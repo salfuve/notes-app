@@ -7,7 +7,6 @@ const {
     isAuthenticated
 } = require('../helpers/auth');
 
-
 router.get('/notes/add', isAuthenticated, (req, res) => {
     res.render('notes/new-note')
 });
