@@ -46,6 +46,9 @@ app.use(flash());
 //global variables
 //para mandar mensajes entre las vistas usamos el 'connect-flash' y para que estos mensajes sean visibles en todo momento
 //creamos la variable global
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use((req, res, next) => {
 
     res.locals.success_msg = req.flash('success_msg');

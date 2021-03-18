@@ -1,14 +1,18 @@
 <div class="card mx-auto">
     <div class="content">
-        <h1>EXAM </h1>
+        <h1>EXAM</h1>
         <form action="/exams/validate-test" method="POST">
             {{#each questions}}
             <input type="hidden" name="item" value="{{this.id}}">
+            <input type="hidden" name="definition" value="{{this.definition}}">
+            <input type="hidden" name="question" value="{{this.question}}">
+            <input type="hidden" name="answer" value="{{this.answer}}">
+            <p>{{{this.definition}}}</p>
             <span>{{{this.question}}}</span>
             <hr>
             {{/each}}
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit" id="validate">
+                <button class="btn btn-primary btn-block" type="submit">
                     Check answers
                 </button>
             </div>

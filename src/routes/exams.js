@@ -4,7 +4,7 @@ const {
     isAuthenticated
 } = require('../helpers/auth');
 
-const Note = require('../models/Note');
+const Exam = require('../models/Exam');
 
 router.post('/exams/new', (req, res) => {
     //res.render('exams/exam-1');
@@ -14,19 +14,20 @@ router.post('/exams/new', (req, res) => {
 router.get('/exams/exam1', (req, res) => {
     res.render('exams/exam1/exam-1');
 })
-router.get('/exams/exam2', (req, res) => {
+router.get('/exams/exam2', async (req, res) => {
 
-    const questions = [{ question: "hola soy una y hago #### y ####", answer: "a", _id: "6031316637b17233fc6932b3" }, { question: "#### hola, yo soy ####", answer: "b", _id: "9991316637b17233fc6932b3" }];
+    const questions = await Exam.aggregate([{ $sample: { size: 10 } }]);
 
     res.render('exams/exam2/exam-2', {
-        
+
         questions: questions.map((e, i) => {
             return {
-                question: e.question.replace(/####/g, '<input type="text" name="answer['+i+']">'),
+                definition: e.definition.replace(e.definition, i+'. '+ e.definition+':'),
+                question: e.question.replace(/####/g, '<input type="text" name="userAnswer[' + i + ']">'),
                 answer: e.answer,
                 id: e._id
             }
-        })  
+        })
     });
 });
 
@@ -119,16 +120,24 @@ router.post('/exams/validate', (req, res) => {
     });
 
 });
+
 router.post('/exams/validate-test', async (req, res) => {
+        console.log('id: ', req.body.item);
+        console.log('def: ', req.body.definition);
+        console.log('ques: ', req.body.question);
+        console.log('ans: ', req.body.answer);
 
-    console.log("request id: ", req.body.item);
-    console.log("request body: ", req.body);
+       const ans0 =  req.body["userAnswer[0]"];
+       const ans1 =  req.body["userAnswer[1]"];
+       const ans2 =  req.body["userAnswer[2]"];
+       const ans3 =  req.body["userAnswer[3]"];
+       const ans4 =  req.body["userAnswer[4]"];
+       const ans5 =  req.body["userAnswer[5]"];
+       const ans6 =  req.body["userAnswer[6]"];
+       const ans7 =  req.body["userAnswer[7]"];
+       const ans8 =  req.body["userAnswer[8]"];
+       const ans9 =  req.body["userAnswer[9]"];
 
-    const ids = req.body.item;
-    for (const id of ids) {
-        const idiom = await Note.findById(id);
-        console.log(idiom);
-    }
 
 });
 module.exports = router;
