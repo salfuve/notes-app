@@ -22,7 +22,7 @@ router.get('/exams/exam2', async (req, res) => {
 
         questions: questions.map((e, i) => {
             return {
-                definition: e.definition.replace(e.definition, i+'. '+ e.definition+':'),
+                definition: e.definition.replace(e.definition, i + '. ' + e.definition + ':'),
                 question: e.question.replace(/####/g, '<input type="text" name="userAnswer[' + i + ']">'),
                 answer: e.answer,
                 id: e._id
@@ -122,22 +122,49 @@ router.post('/exams/validate', (req, res) => {
 });
 
 router.post('/exams/validate-test', async (req, res) => {
-        console.log('id: ', req.body.item);
-        console.log('def: ', req.body.definition);
-        console.log('ques: ', req.body.question);
-        console.log('ans: ', req.body.answer);
+    console.log('id: ', req.body.item);
+    console.log('def: ', req.body.definition);
+    const goodAnswers = req.body.answer;
+    const userAnswers = [];
+    const correctedAnswers = [{
+        userAnswer: String,
+        error: Boolean
+    }];
 
-       const ans0 =  req.body["userAnswer[0]"];
-       const ans1 =  req.body["userAnswer[1]"];
-       const ans2 =  req.body["userAnswer[2]"];
-       const ans3 =  req.body["userAnswer[3]"];
-       const ans4 =  req.body["userAnswer[4]"];
-       const ans5 =  req.body["userAnswer[5]"];
-       const ans6 =  req.body["userAnswer[6]"];
-       const ans7 =  req.body["userAnswer[7]"];
-       const ans8 =  req.body["userAnswer[8]"];
-       const ans9 =  req.body["userAnswer[9]"];
+    let i;
+    for (i = 0; i < 10; i++) {
+        const userAnswer = req.body["userAnswer[" + i + "]"];
+        if (typeof userAnswer === 'object') {
+            
+            const answer = {
+                userAnswer: userAnswer.join(' '),
+                error: true
+            }
+            userAnswers.push(answer);
+        } else {
+            const ans = userAnswer
+            const answer = {
+                userAnswer: ans,
+                error: true
+            }
+            userAnswers.push(answer);
+        }
+    }
 
+    let j;
+    for (j = 0; j < Object.keys(goodAnswers).length; j++) {
+        if (userAnswers[j].userAnswer.toLowerCase().toString() == goodAnswers[j].toLowerCase().toString()) {
+            console.log('OK')
+            userAnswers[j].error = false
+        } else {
+            console.log('NOT OK')
+            userAnswers[j].error = true
+        }
+    }
+
+    userAnswers.forEach(element => {
+        console.log(element)
+    });
 
 });
 module.exports = router;
