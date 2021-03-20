@@ -7,7 +7,6 @@ const {
 const Exam = require('../models/Exam');
 
 router.post('/exams/new', (req, res) => {
-    //res.render('exams/exam-1');
     res.render('exams/exams');
 });
 
@@ -123,30 +122,33 @@ router.post('/exams/validate', (req, res) => {
 
 router.post('/exams/validate-test', async (req, res) => {
     console.log('id: ', req.body.item);
-    console.log('def: ', req.body.definition);
+    console.log('def: ', req.body.definition[0]);
+    console.log('ans: ', req.body.answer);
     const goodAnswers = req.body.answer;
     const userAnswers = [];
-    const correctedAnswers = [{
-        userAnswer: String,
-        error: Boolean
-    }];
+    const definitions = req.body.definition;
 
     let i;
     for (i = 0; i < 10; i++) {
+
         const userAnswer = req.body["userAnswer[" + i + "]"];
+        const definition = req.body.definition[i];
+
         if (typeof userAnswer === 'object') {
             
             const answer = {
+                definition: definition,
                 userAnswer: userAnswer.join(' '),
                 error: true
-            }
+            };
             userAnswers.push(answer);
         } else {
             const ans = userAnswer
             const answer = {
+                definition: definition,
                 userAnswer: ans,
                 error: true
-            }
+            };
             userAnswers.push(answer);
         }
     }
@@ -155,16 +157,21 @@ router.post('/exams/validate-test', async (req, res) => {
     for (j = 0; j < Object.keys(goodAnswers).length; j++) {
         if (userAnswers[j].userAnswer.toLowerCase().toString() == goodAnswers[j].toLowerCase().toString()) {
             console.log('OK')
-            userAnswers[j].error = false
+            userAnswers[j].error = false;
         } else {
             console.log('NOT OK')
-            userAnswers[j].error = true
+            userAnswers[j].error = true;
         }
     }
 
-    userAnswers.forEach(element => {
-        console.log(element)
+    res.render('exams/exam2/exam-2-answers', {
+        userAnswers: userAnswers.map(e => {
+            return {
+                definition: e.definition,
+                userAnswer: e.userAnswer,
+                error: e.error
+            }
+        })
     });
-
 });
 module.exports = router;

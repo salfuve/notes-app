@@ -1,0 +1,14 @@
+<div class="card mx-auto">
+    <div class="content" style="padding:20px;">
+        <h1>EXAM - ANSWERS</h1>
+        <ul>
+            {{#each userAnswers}}
+            <li>
+               <p>{{this.definition}}</p>
+                {{this.userAnswer}}
+            </li>
+            <hr>
+            {{/each}}
+        </ul>
+    </div>
+</div> 
