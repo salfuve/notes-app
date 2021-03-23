@@ -114,3 +114,40 @@ body {
 .fa-times-circle {
   color: red;
 }
+
+.fa-frown {
+  color: red;
+  font-size: 60px;
+  padding: 5px;
+  text-align: center;
+  display: block !important;
+}
+
+.fa-smile-beam {
+  color: green;
+  font-size: 60px;
+  padding: 5px;
+  text-align: center;
+  display: block !important;
+}
+
+p.card-text.score-text {
+  font-size: 2rem;
+  text-align: center;
+}
+
+p.card-text.wrong-answer.score-text {
+  font-size: 2rem;
+  text-align: center;
+}
+p.card-text.perfect-answer.score-text {
+  font-size: 2rem;
+  text-align: center;
+  color: blue;
+}
+p.card-text.correct-answer.score-text {
+  font-size: 2rem;
+  text-align: center;
+  background-color: transparent;
+  color:green
+}

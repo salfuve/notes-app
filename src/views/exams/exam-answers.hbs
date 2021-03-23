@@ -1,0 +1,46 @@
+<div class="card mx-auto">
+  <div class="card-body">
+    <h3 class="card-title">Your score :</h3>
+    <p class="card-text score-text">{{nHits}} out of 10 </p>
+    {{#ifCond nErrors '<=' 9 }} <p class="card-text correct-answer score-text">You passed <i
+        class="fas fa-smile-beam"></i> </p>
+      {{/ifCond}}
+      {{#ifCond nErrors '>' 5}}
+      <p class="card-text wrong-answer score-text">You failed</p> <i class="fas fa-frown"></i>
+      {{/ifCond}}
+      {{#ifCond nErrors '==' 0}}
+      <p class="card-text perfect-answer score-text">Excellent! My hat goes off to you </p>
+      {{/ifCond}}
+  </div>
+</div>
+<div class="card mx-auto">
+  <div class="content" style="padding:20px;">
+    <h1>EXAM - ANSWERS</h1>
+    <ul>
+      {{#each userAnswers}}
+      <li>
+        <p>{{this.definition}}</p>
+        {{#if this.error}}
+        <span class="wrong-answer">{{this.userAnswer}}</span>
+        <i class="fas fa-times-circle"></i>
+        <i class="fas fa-long-arrow-alt-right"></i>
+        <span class="correct-answer">{{this.goodAnswer}}</span>
+        {{else}}
+        <span class="correct-answer">{{this.userAnswer}}</span>
+        <i class="fas fa-check"></i>
+        {{/if}}
+      </li>
+      <hr>
+      {{/each}}
+    </ul>
+
+    <form action="/exams/back-to-idioms" method="POST">
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">
+         Go back to idioms
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
