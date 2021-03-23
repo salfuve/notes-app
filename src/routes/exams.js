@@ -121,22 +121,20 @@ router.post('/exams/validate', (req, res) => {
 });
 
 router.post('/exams/validate-test', async (req, res) => {
-    console.log('id: ', req.body.item);
-    console.log('def: ', req.body.definition[0]);
-    console.log('ans: ', req.body.answer);
+
     const goodAnswers = req.body.answer;
     const userAnswers = [];
-    const definitions = req.body.definition;
 
     let i;
     for (i = 0; i < 10; i++) {
 
         const userAnswer = req.body["userAnswer[" + i + "]"];
         const definition = req.body.definition[i];
-
+        const goodAnswer = goodAnswers[i];
         if (typeof userAnswer === 'object') {
             
             const answer = {
+                goodAnswer: goodAnswer,
                 definition: definition,
                 userAnswer: userAnswer.join(' '),
                 error: true
@@ -145,6 +143,7 @@ router.post('/exams/validate-test', async (req, res) => {
         } else {
             const ans = userAnswer
             const answer = {
+                goodAnswer: goodAnswer,
                 definition: definition,
                 userAnswer: ans,
                 error: true
@@ -156,10 +155,8 @@ router.post('/exams/validate-test', async (req, res) => {
     let j;
     for (j = 0; j < Object.keys(goodAnswers).length; j++) {
         if (userAnswers[j].userAnswer.toLowerCase().toString() == goodAnswers[j].toLowerCase().toString()) {
-            console.log('OK')
             userAnswers[j].error = false;
         } else {
-            console.log('NOT OK')
             userAnswers[j].error = true;
         }
     }
@@ -167,6 +164,8 @@ router.post('/exams/validate-test', async (req, res) => {
     res.render('exams/exam2/exam-2-answers', {
         userAnswers: userAnswers.map(e => {
             return {
+
+                goodAnswer: e.goodAnswer,
                 definition: e.definition,
                 userAnswer: e.userAnswer,
                 error: e.error
