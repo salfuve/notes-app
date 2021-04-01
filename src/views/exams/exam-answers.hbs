@@ -2,7 +2,7 @@
   <div class="card-body">
     <h3 class="card-title">Your score :</h3>
     <p class="card-text score-text">{{nHits}} out of 10 </p>
-    {{#ifCond nErrors '<=' 9 }} <p class="card-text correct-answer score-text">You passed <i
+    {{#ifCond nErrors '<=' 5 }} <p class="card-text correct-answer score-text">You passed <i
         class="fas fa-smile-beam"></i> </p>
       {{/ifCond}}
       {{#ifCond nErrors '>' 5}}

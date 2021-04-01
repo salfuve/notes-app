@@ -11,6 +11,9 @@
                     <input type="hidden" name="answer" value="{{this.answer}}">
                     <p>{{{this.definition}}}</p>
                     <span>{{{this.question}}}</span>
+                    <i class="fas fa-lightbulb" title="View hint" style="padding-left: 10px;" onclick="showhide('{{this.id}}')">
+                    </i>
+                    <p id="{{this.id}}" class="hidden" style="color:blue">Hint: {{{this.hint}}}</p>
                 </li>
                 <hr>
                 {{/each}}
@@ -23,3 +26,12 @@
         </form>
     </div>
 </div>
+
+<script>
+
+function showhide(id) {
+  
+  var div = document.getElementById(id);
+  div.classList.toggle('hidden'); 
+}
+</script>

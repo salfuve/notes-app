@@ -17,6 +17,7 @@ router.get('/exams/take-exam', async (req, res) => {
                 definition: e.definition.replace(e.definition, i + '. ' + e.definition + ':'),
                 question: e.question.replace(/####/g, '<input type="text" name="userAnswer[' + i + ']">'),
                 answer: e.answer,
+                hint: e.hint,
                 id: e._id
             }
         })
